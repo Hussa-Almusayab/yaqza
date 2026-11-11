@@ -10,7 +10,7 @@ from engine.scoring import build_report, score_answers
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo.png")
 
 # أيقونة التبويب في المتصفح
-st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="centered")
+st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="wide")
 
 st.markdown(
     """
