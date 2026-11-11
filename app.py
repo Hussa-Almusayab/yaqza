@@ -14,108 +14,52 @@ st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH
 st.markdown(
     """
     <style>
-    @font-face {
-      font-family: 'Cairo';
-      font-style: normal;
-      font-weight: 400;
-      src: url(https://gstatic.com) format('truetype');
-    }
-    @font-face {
-      font-family: 'Cairo';
-      font-style: normal;
-      font-weight: 700;
-      src: url(https://gstatic.com) format('truetype');
-    }
+    @import url('https://googleapis.com');
 
-    /* تثبيت المظهر الداكن واتجاه اليمين لليسار على الجوال والآيباد واللابتوب */
-    html, body, [class*="css"], .stApp, [data-testid="stHeader"] { 
+    /* تطبيق الخط العربي بدون كسر أبعاد شاشة الجوال */
+    html, body, [class*="css"] {
         font-family: 'Cairo', sans-serif !important;
-        background-color: #0f172a !important;
-        color: #f8fafc !important;
-        direction: rtl !important;
     }
 
-    /* ضبط حاوية المحتوى لتتجاوب بسلاسة مع شاشة الجوال */
-    .block-container {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        max-width: 760px !important;
+    /* ضبط اتجاه النصوص العربية داخل العناصر فقط (وليس على هيكل الصفحة) */
+    .stMarkdown, p, label, h1, h2, h3, [data-testid="stAlert"] {
+        direction: rtl;
+        text-align: right;
     }
 
-    /* الشريط الجانبي */
-    [data-testid="stSidebar"] {
-        background-color: #1e293b !important;
-        direction: rtl !important;
-        text-align: center !important;
-    }
-
-    /* البطاقات ذات الحدود */
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        background-color: #1e293b !important;
-        border: 1px solid #334155 !important;
-        border-radius: 14px !important;
-        padding: 0.5rem !important;
-        direction: rtl !important;
-    }
-
-    /* توسيط العناوين الرئيسية */
+    /* توسيط العناوين الرئيسية والشعار */
     h1, h2, h3 {
-        color: #f8fafc !important;
         text-align: center !important;
-        direction: rtl !important;
     }
 
-    /* محاذاة النصوص والأسئلة والخيارات لليمين لراحة القراءة على الجوال */
-    p, label, .stMarkdown, .stCaption, div[role="radiogroup"] label {
-        color: #f8fafc !important;
-        text-align: right !important;
-        direction: rtl !important;
-        line-height: 1.7 !important;
-    }
-
-    /* صناديق التنبيه والملاحظات بألوان ثابتة لا تتأثر بوضع الجهاز */
-    [data-testid="stAlert"] {
-        background-color: #1e293b !important;
-        border: 1px solid #38bdf8 !important;
-        border-radius: 10px !important;
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    [data-testid="stAlert"] p {
-        color: #e2e8f0 !important;
-        text-align: right !important;
-    }
-
-    /* تنسيق الأزرار لتكون بعرض كامل ومريحة للمس على الجوال */
-    .stButton > button, .stDownloadButton > button {
-        width: 100% !important;
-        background-color: #10B981 !important;
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        border-radius: 10px !important;
-        border: none !important;
-        padding: 0.6rem 1rem !important;
-    }
-    .stButton > button:hover, .stDownloadButton > button:hover {
-        background-color: #059669 !important;
-    }
-
-    /* توسيط الشعار */
     [data-testid="stImage"] {
-        display: flex !important;
-        justify-content: center !important;
+        display: flex;
+        justify-content: center;
     }
 
-    /* إبقاء الأكواد والأدلة التقنية من اليسار لليمين مع تمرير أفقي على الجوال */
-    pre, code { 
-        direction: ltr !important; 
-        text-align: left !important; 
-        overflow-x: auto !important;
+    /* تنسيق خيارات الأسئلة لليمين ومريحة للمس على الجوال */
+    div[role="radiogroup"] {
+        direction: rtl;
+        text-align: right;
+    }
+    div[role="radiogroup"] label {
+        padding: 6px 0;
     }
 
-    /* تحسين عرض مقاييس الدرجات على الجوال */
+    /* الأزرار بعرض كامل ومريحة على الجوال واللابتوب */
+    .stButton > button, .stDownloadButton > button {
+        width: 100%;
+        border-radius: 10px;
+        font-weight: 700;
+    }
+
+    /* إبقاء الأكواد التقنية من اليسار لليمين */
+    pre, code {
+        direction: ltr !important;
+        text-align: left !important;
+    }
+
+    /* توسيط أرقام التقرير */
     [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
         text-align: center !important;
     }
@@ -141,10 +85,10 @@ def render_sidebar():
     with st.sidebar:
         st.image(LOGO_PATH, width=100)
         st.header(APP_NAME)
-        st.markdown(f"<p style='text-align: center !important; color: #94a3b8 !important;'>{TAGLINE}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center; color: #94a3b8;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         
-        st.markdown("<h3 style='color: #38bdf8 !important; font-size: 1.1rem;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color: #38bdf8; font-size: 1.05rem; text-align: center;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
         st.divider()
         
         if ss.stage == "room":
@@ -163,7 +107,7 @@ def show_intro():
     with st.container(border=True):
         st.image(LOGO_PATH, width=140)
         st.title(APP_NAME)
-        st.markdown(f"<p style='text-align: center !important; color: #38bdf8 !important; font-weight: 600;'>{TAGLINE}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center; color: #38bdf8; font-weight: 600;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         st.write(
             "أنت مسؤول الأمن في شركة وهمية. في كل غرفة موقف من مواقف العمل، "
