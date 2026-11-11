@@ -9,96 +9,115 @@ from engine.scoring import build_report, score_answers
 # تحديد مسار الصورة تلقائياً بجانب ملف app.py
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo.png")
 
-# أيقونة التبويب في المتصفح - استخدام التخطيط المركزي تماماً كالمشاريع الناجحة
 st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="centered")
 
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    @font-face {
+      font-family: 'Cairo';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://gstatic.com) format('truetype');
+    }
+    @font-face {
+      font-family: 'Cairo';
+      font-style: normal;
+      font-weight: 700;
+      src: url(https://gstatic.com) format('truetype');
+    }
 
-    /* تثبيت المظهر الداكن المريح والواضح على جميع الأجهزة بغض النظر عن نظام التشغيل */
-    html, body, [class*="css"], .stApp { 
+    /* تثبيت المظهر الداكن واتجاه اليمين لليسار على الجوال والآيباد واللابتوب */
+    html, body, [class*="css"], .stApp, [data-testid="stHeader"] { 
         font-family: 'Cairo', sans-serif !important;
         background-color: #0f172a !important;
         color: #f8fafc !important;
         direction: rtl !important;
-        text-align: right !important;
     }
 
-    /* ضمان تمركز المحتوى بشكل سليم على الجوال والآيباد واللابتوب */
-    .main .block-container {
-        background-color: #0f172a !important;
-        direction: rtl !important;
-        text-align: right !important;
-        max-width: 800px !important;
-        padding: 1rem !important;
+    /* ضبط حاوية المحتوى لتتجاوب بسلاسة مع شاشة الجوال */
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        max-width: 760px !important;
     }
 
     /* الشريط الجانبي */
     [data-testid="stSidebar"] {
         background-color: #1e293b !important;
         direction: rtl !important;
-        text-align: right !important;
+        text-align: center !important;
     }
 
     /* البطاقات ذات الحدود */
-    [data-testid="stVerticalBlockBorderWrapper"], .stAlert {
+    [data-testid="stVerticalBlockBorderWrapper"] {
         background-color: #1e293b !important;
-        border-color: #334155 !important;
-        border-radius: 12px !important;
+        border: 1px solid #334155 !important;
+        border-radius: 14px !important;
+        padding: 0.5rem !important;
         direction: rtl !important;
-        text-align: right !important;
     }
 
-    /* صناديق التنبيه st.info بألوان واضحة وثابتة لا تتأثر بالوضع الفاتح/الداكن للمتصفح */
-    div[data-testid="stAlert"], div[data-testid="stInfo"] {
-        background-color: #f1f5f9 !important;
-        color: #0f172a !important;
-        border-radius: 10px !important;
+    /* توسيط العناوين الرئيسية */
+    h1, h2, h3 {
+        color: #f8fafc !important;
+        text-align: center !important;
+        direction: rtl !important;
     }
 
-    div[data-testid="stAlert"] p, div[data-testid="stInfo"] div, div[data-testid="stInfo"] p {
-        color: #0f172a !important;
+    /* محاذاة النصوص والأسئلة والخيارات لليمين لراحة القراءة على الجوال */
+    p, label, .stMarkdown, .stCaption, div[role="radiogroup"] label {
+        color: #f8fafc !important;
         text-align: right !important;
         direction: rtl !important;
-        font-weight: 600 !important;
         line-height: 1.7 !important;
     }
 
-    /* العناوين والفقرات */
-    h1, h2, h3 {
-        color: #f8fafc !important;
-        text-align: right !important;
+    /* صناديق التنبيه والملاحظات بألوان ثابتة لا تتأثر بوضع الجهاز */
+    [data-testid="stAlert"] {
+        background-color: #1e293b !important;
+        border: 1px solid #38bdf8 !important;
+        border-radius: 10px !important;
         direction: rtl !important;
+        text-align: right !important;
+    }
+    [data-testid="stAlert"] p {
+        color: #e2e8f0 !important;
+        text-align: right !important;
     }
 
-    p, label, .stMarkdown, .stCaption, span {
-        color: #f8fafc !important;
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    /* الأزرار بمرونة تامة للتفاعل باللمس أو الماوس */
-    .stButton>button, .stDownloadButton>button {
+    /* تنسيق الأزرار لتكون بعرض كامل ومريحة للمس على الجوال */
+    .stButton > button, .stDownloadButton > button {
         width: 100% !important;
         background-color: #10B981 !important;
-        color: white !important;
-        font-weight: bold;
-        border-radius: 8px;
-        border: none;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        border-radius: 10px !important;
+        border: none !important;
+        padding: 0.6rem 1rem !important;
+    }
+    .stButton > button:hover, .stDownloadButton > button:hover {
+        background-color: #059669 !important;
     }
 
-    /* الشعار والصور */
+    /* توسيط الشعار */
     [data-testid="stImage"] {
-        display: flex;
-        justify-content: center;
+        display: flex !important;
+        justify-content: center !important;
     }
 
-    /* الأكواد التقنية */
+    /* إبقاء الأكواد والأدلة التقنية من اليسار لليمين مع تمرير أفقي على الجوال */
     pre, code { 
         direction: ltr !important; 
         text-align: left !important; 
+        overflow-x: auto !important;
+    }
+
+    /* تحسين عرض مقاييس الدرجات على الجوال */
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        text-align: center !important;
     }
     </style>
     """,
@@ -122,11 +141,10 @@ def render_sidebar():
     with st.sidebar:
         st.image(LOGO_PATH, width=100)
         st.header(APP_NAME)
-        st.caption(TAGLINE)
+        st.markdown(f"<p style='text-align: center !important; color: #94a3b8 !important;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         
-        # كتابة الاسم بين الخطين الفاصلين
-        st.markdown("<h3 style='color: #38bdf8 !important; margin-top: -10px;'>إعداد وتصميم: حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color: #38bdf8 !important; font-size: 1.1rem;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
         st.divider()
         
         if ss.stage == "room":
@@ -143,15 +161,18 @@ def render_sidebar():
 
 def show_intro():
     with st.container(border=True):
-        st.image(LOGO_PATH, width=150)
+        st.image(LOGO_PATH, width=140)
         st.title(APP_NAME)
-        st.subheader(TAGLINE)
+        st.markdown(f"<p style='text-align: center !important; color: #38bdf8 !important; font-weight: 600;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         st.write(
             "أنت مسؤول الأمن في شركة وهمية. في كل غرفة موقف من مواقف العمل، "
-            "وعليك أن تتصرف كما يتصرف المحترفون، في النهاية تحصل على تقرير بدرجتك لكل مجال."
+            "وعليك أن تتصرف كما يتصرف المحترفون، وفي النهاية تحصل على تقرير بدرجتك لكل مجال."
         )
-        st.info("مشروع تعليمي مستوحى من مبادئ الضوابط الأساسية للأمن السيبراني (NCA ECC). هو ليس أداة امتثال رسمية ولا بديلًا عن تقييم متخصص. جميع البيانات والسيناريوهات وهمية.")
+        st.info(
+            "مشروع تعليمي مستوحى من مبادئ الضوابط الأساسية للأمن السيبراني (NCA ECC)، "
+            "وهو ليس أداة امتثال رسمية ولا بديلًا عن التقييم المتخصص، وجميع البيانات والسيناريوهات الواردة فيه وهمية."
+        )
         st.write("")
         if st.button("🚀 ابدأ اللعبة الآن", type="primary"):
             ss.stage = "room"
@@ -175,7 +196,7 @@ def show_room():
             st.markdown(f"**السؤال {idx}: {q['prompt']}**")
             st.caption(f"المجال: {DOMAINS[q['domain']]} | النقاط: {q['points']}")
             choice = st.radio(
-                "اختار إجابة", q["options"], index=None,
+                "اختر إجابة", q["options"], index=None,
                 key=f"radio_{q['id']}", disabled=checked, label_visibility="collapsed",
             )
             if choice is not None:
@@ -224,7 +245,7 @@ def show_report():
 
     with st.expander("📄 نص التقرير الكامل", expanded=bool(result["mistakes"])):
         report = build_report(result, APP_NAME)
-        st.code(report, language="markdown")
+        st.markdown(report)
 
     col1, col2 = st.columns(2)
     with col1:
