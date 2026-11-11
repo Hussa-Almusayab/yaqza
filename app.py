@@ -54,15 +54,19 @@ st.markdown(
         justify-content: center;
     }
 
-    /* صناديق التنبيه بألوان واضحة لا تتأثر بوضع الجوال */
-    [data-testid="stAlert"] {
-        background-color: #1e293b !important;
+    /* بطاقة إخلاء المسؤولية المخصصة (تظهر بوضوح تام في الوضع الفاتح والداكن) */
+    .disclaimer-box {
+        background-color: #0f172a !important;
         border: 1px solid #38bdf8 !important;
-        direction: rtl;
-        text-align: right;
-    }
-    [data-testid="stAlert"] p {
+        border-right: 4px solid #38bdf8 !important;
+        border-radius: 10px !important;
+        padding: 14px 16px !important;
         color: #e2e8f0 !important;
+        direction: rtl !important;
+        text-align: right !important;
+        line-height: 1.75 !important;
+        font-size: 0.95rem !important;
+        margin-top: 10px !important;
     }
 
     /* تنسيق خيارات الأسئلة لليمين ومريحة للمس على الجوال */
@@ -142,9 +146,14 @@ def show_intro():
             "أنت مسؤول الأمن في شركة وهمية. في كل غرفة موقف من مواقف العمل، "
             "وعليك أن تتصرف كما يتصرف المحترفون، وفي النهاية تحصل على تقرير بدرجتك لكل مجال."
         )
-        st.info(
-            "مشروع تعليمي مستوحى من مبادئ الضوابط الأساسية للأمن السيبراني (NCA ECC)، "
-            "وهو ليس أداة امتثال رسمية ولا بديلًا عن التقييم المتخصص، وجميع البيانات والسيناريوهات الواردة فيه وهمية."
+        st.markdown(
+            """
+            <div class="disclaimer-box">
+                ℹ️ مشروع تعليمي مستوحى من مبادئ الضوابط الأساسية للأمن السيبراني (NCA ECC)، 
+                وهو ليس أداة امتثال رسمية ولا بديلًا عن التقييم المتخصص، وجميع البيانات والسيناريوهات الواردة فيه وهمية.
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
         st.write("")
         if st.button("🚀 ابدأ اللعبة الآن", type="primary"):
