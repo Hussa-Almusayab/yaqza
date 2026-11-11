@@ -17,22 +17,24 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-    /* فرض اتجاه اللغة العربية ومنع التداخل على الجوال */
-    html, body, [class*="css"], .stApp, [data-testid="stHeader"], [data-testid="stToolbar"] { 
+    /* تهيئة الخطوط العامة وتوجيه الصفحة للغة العربية */
+    html, body, [class*="css"], .stApp { 
         font-family: 'Cairo', sans-serif !important;
         background-color: #0f172a !important;
         color: #f8fafc !important;
         direction: rtl !important;
         text-align: right !important;
     }
-    
-    /* إصلاح محاذاة الحاويات والبطاقات على الهواتف */
-    div[data-testid="stVerticalBlock"], div.element-container {
+
+    /* إصلاح العرض على الهواتف ومنع تداخل الحروف الطولية */
+    .main .block-container {
         direction: rtl !important;
         text-align: right !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 
-    /* لون الشريط الجانبي وتوجيهه */
+    /* لون الشريط الجانبي */
     [data-testid="stSidebar"] {
         background-color: #1e293b !important;
         direction: rtl !important;
@@ -40,49 +42,44 @@ st.markdown(
     }
 
     /* تنسيق البطاقات ذات الحدود */
-    [data-testid="stVerticalBlockBorderWrapper"] {
+    [data-testid="stVerticalBlockBorderWrapper"], .stAlert {
         background-color: #1e293b !important;
         border-color: #334155 !important;
         border-radius: 12px !important;
         direction: rtl !important;
+        text-align: right !important;
     }
 
-    /* توسيط العناوين الرئيسية فقط لتبقى متناسقة */
+    /* تنسيق العناوين والفقرات لتجنب أي تداخل */
     h1, h2, h3 {
-        color: #f8fafc !important;
-        text-align: center !important;
-        direction: rtl !important;
-    }
-
-    /* النصوص العادية والفقرات تتبع اليمين */
-    p, label, .stMarkdown, .stCaption {
         color: #f8fafc !important;
         text-align: right !important;
         direction: rtl !important;
     }
 
-    /* تنسيق الأزرار لتأخذ عرض الشاشة بشكل مريح على الجوال */
-    .stButton, .stDownloadButton {
-        display: flex;
-        justify-content: center;
-        width: 100%;
+    p, label, .stMarkdown, .stCaption, span {
+        color: #f8fafc !important;
+        text-align: right !important;
+        direction: rtl !important;
     }
-    
-    .stButton>button {
+
+    /* تنسيق الأزرار لتأخذ عرض الشاشة بمرونة وسهولة بالضغط */
+    .stButton>button, .stDownloadButton>button {
         width: 100% !important;
         background-color: #10B981 !important;
         color: white !important;
         font-weight: bold;
         border-radius: 8px;
+        border: none;
     }
 
-    /* توسيط الشعار والصور */
+    /* توسيط الشعار والصور فقط */
     [data-testid="stImage"] {
         display: flex;
         justify-content: center;
     }
 
-    /* إبقاء الأكواد والأدلة التقنية من اليسار لليمين لقراءتها برمجياً بشكل صحيح */
+    /* إبقاء الأكواد والأدلة التقنية من اليسار لليمين */
     pre, code { 
         direction: ltr !important; 
         text-align: left !important; 
