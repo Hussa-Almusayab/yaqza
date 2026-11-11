@@ -50,6 +50,14 @@ st.markdown(
         text-align: right !important;
     }
 
+    /* تعديل لون ونصوص صناديق التنبيه st.info لتكون واضحة ومقروءة تماماً */
+    div[data-testid="stAlert"] p, div[data-testid="stInfo"] div, div[data-testid="stInfo"] p {
+        color: #0f172a !important;
+        text-align: right !important;
+        direction: rtl !important;
+        font-weight: 600 !important;
+    }
+
     /* تنسيق العناوين والفقرات لتجنب أي تداخل */
     h1, h2, h3 {
         color: #f8fafc !important;
