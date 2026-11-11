@@ -84,6 +84,13 @@ st.markdown(
         direction: ltr !important; 
         text-align: left !important; 
     }
+
+    /* إخفاء الشريط الجانبي تماماً على الهواتف المحمولة لحل مشكلة التداخل والتخطيط */
+    @media (max-width: 768px) {
+        [data-testid="stSidebar"] {
+            display: none !important;
+        }
+    }
     </style>
     """,
     unsafe_allow_html=True,
