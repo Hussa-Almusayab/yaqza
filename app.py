@@ -17,7 +17,7 @@ st.markdown(
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-    /* تهيئة الخطوط العامة وتوجيه الصفحة للغة العربية */
+    /* فرض ألوان ثابتة وموحدة (وضع داكن احترافي) بغض النظر عن إعدادات نظام المستخدم (فاتح أو داكن) */
     html, body, [class*="css"], .stApp { 
         font-family: 'Cairo', sans-serif !important;
         background-color: #0f172a !important;
@@ -26,22 +26,23 @@ st.markdown(
         text-align: right !important;
     }
 
-    /* إصلاح العرض على الهواتف ومنع تداخل الحروف الطولية */
+    /* تثبيت لون خلفية الحاوية الرئيسية لتكون متناسقة على كل الأجهزة */
     .main .block-container {
+        background-color: #0f172a !important;
         direction: rtl !important;
         text-align: right !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
     }
 
-    /* لون الشريط الجانبي */
+    /* لون الشريط الجانبي الثابت */
     [data-testid="stSidebar"] {
         background-color: #1e293b !important;
         direction: rtl !important;
         text-align: right !important;
     }
 
-    /* تنسيق البطاقات ذات الحدود */
+    /* تنسيق البطاقات ذات الحدود لتناسب اللابتوب والآيباد والجوال */
     [data-testid="stVerticalBlockBorderWrapper"], .stAlert {
         background-color: #1e293b !important;
         border-color: #334155 !important;
@@ -50,15 +51,22 @@ st.markdown(
         text-align: right !important;
     }
 
-    /* تعديل لون ونصوص صناديق التنبيه st.info لتكون واضحة ومقروءة تماماً */
+    /* تثبيت مظهر صناديق التنبيه st.info بألوان واضحة ومقروءة وثابتة */
+    div[data-testid="stAlert"], div[data-testid="stInfo"] {
+        background-color: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-radius: 10px !important;
+    }
+
     div[data-testid="stAlert"] p, div[data-testid="stInfo"] div, div[data-testid="stInfo"] p {
         color: #0f172a !important;
         text-align: right !important;
         direction: rtl !important;
         font-weight: 600 !important;
+        line-height: 1.7 !important;
     }
 
-    /* تنسيق العناوين والفقرات لتجنب أي تداخل */
+    /* تنسيق العناوين والفقرات لتبقى واضحة */
     h1, h2, h3 {
         color: #f8fafc !important;
         text-align: right !important;
@@ -71,7 +79,7 @@ st.markdown(
         direction: rtl !important;
     }
 
-    /* تنسيق الأزرار لتأخذ عرض الشاشة بمرونة وسهولة بالضغط */
+    /* تنسيق الأزرار بمرونة تامة تتناسب مع اللمس والشاشات المختلفة */
     .stButton>button, .stDownloadButton>button {
         width: 100% !important;
         background-color: #10B981 !important;
@@ -81,7 +89,7 @@ st.markdown(
         border: none;
     }
 
-    /* توسيط الشعار والصور فقط */
+    /* توسيط الشعار والصور */
     [data-testid="stImage"] {
         display: flex;
         justify-content: center;
@@ -93,7 +101,7 @@ st.markdown(
         text-align: left !important; 
     }
 
-    /* إخفاء الشريط الجانبي تماماً على الهواتف المحمولة لحل مشكلة التداخل والتخطيط */
+    /* إخفاء الشريط الجانبي تماماً على الهواتف المحمولة فقط لمنع التداخل */
     @media (max-width: 768px) {
         [data-testid="stSidebar"] {
             display: none !important;
