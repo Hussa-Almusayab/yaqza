@@ -122,7 +122,7 @@ def show_room():
     level = levels[ss.room]
     st.progress((ss.room + 1) / len(levels), text=f"الغرفة {ss.room + 1} من {len(levels)}")
 
-    # بطاقة القصة والدليل التقني
+    # بطاقة القصة والدليل التقني (قابلة للنسخ عبر st.code)
     with st.container(border=True):
         st.header(f"🚪 {level['title']}")
         st.write(level["story"])
@@ -185,7 +185,8 @@ def show_report():
 
     with st.expander("📄 نص التقرير الكامل", expanded=bool(result["mistakes"])):
         report = build_report(result, APP_NAME)
-        st.markdown(report)
+        # جعل التقرير الكامل قابل للنسخ بسهولة عبر st.code بتنسيق markdown
+        st.code(report, language="markdown")
 
     col1, col2 = st.columns(2)
     with col1:
