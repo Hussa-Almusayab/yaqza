@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" alt="شعار يقظة" width="160">
+</p>
+
 # يقظة | Yaqza
 
 لعبة تعليمية بالعربية تعلّم مبادئ الأمن السيبراني والامتثال: أنت مسؤول الأمن في شركة وهمية، وفي كل غرفة موقف عملي، وفي النهاية تحصل على تقرير بدرجتك لكل مجال (الحوكمة، الدفاع، الصمود).
@@ -9,6 +13,7 @@ An Arabic educational game that teaches cybersecurity and compliance basics thro
 **Not an official compliance tool.** Inspired by the principles of the Saudi NCA Essential Cybersecurity Controls (ECC); it does not reproduce their text. All data and scenarios are fictional.
 
 ## الغرف الحالية
+
 | الغرفة | المهارة |
 |---|---|
 | 1. كلمات المرور | عبارات المرور، MFA، أقل صلاحية، سياسة مكتوبة |
@@ -36,4 +41,4 @@ An Arabic educational game that teaches cybersecurity and compliance basics thro
     levels/             الغرف (ملف JSON لكل غرفة)
     tests/              اختبارات pytest
 
-المؤلفة: Hussa Almusayab · الرخصة: MIT
+المؤلفة: حصه بنت فهد المسيب (Hussa Almusayab) · الرخصة: MIT
