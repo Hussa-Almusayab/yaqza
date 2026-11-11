@@ -175,7 +175,7 @@ def show_report():
         st.balloons()
 
     with st.container(border=True):
-        st.title("📋 التقرير الأمني النهائي")
+        st.title("📋 تقريرك الأمني النهائي")
         st.metric("الدرجة الكلية", f"{result['total_percent']}%", result["grade"])
         st.divider()
         cols = st.columns(len(DOMAINS))
