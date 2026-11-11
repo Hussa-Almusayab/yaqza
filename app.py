@@ -9,15 +9,15 @@ from engine.scoring import build_report, score_answers
 # تحديد مسار الصورة تلقائياً بجانب ملف app.py
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo.png")
 
-# أيقونة التبويب في المتصفح
-st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="wide")
+# أيقونة التبويب في المتصفح - استخدام التخطيط المركزي تماماً كالمشاريع الناجحة
+st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="centered")
 
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-    /* فرض ألوان ثابتة وموحدة (وضع داكن احترافي) بغض النظر عن إعدادات نظام المستخدم (فاتح أو داكن) */
+    /* تثبيت المظهر الداكن المريح والواضح على جميع الأجهزة بغض النظر عن نظام التشغيل */
     html, body, [class*="css"], .stApp { 
         font-family: 'Cairo', sans-serif !important;
         background-color: #0f172a !important;
@@ -26,23 +26,23 @@ st.markdown(
         text-align: right !important;
     }
 
-    /* تثبيت لون خلفية الحاوية الرئيسية لتكون متناسقة على كل الأجهزة */
+    /* ضمان تمركز المحتوى بشكل سليم على الجوال والآيباد واللابتوب */
     .main .block-container {
         background-color: #0f172a !important;
         direction: rtl !important;
         text-align: right !important;
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
+        max-width: 800px !important;
+        padding: 1rem !important;
     }
 
-    /* لون الشريط الجانبي الثابت */
+    /* الشريط الجانبي */
     [data-testid="stSidebar"] {
         background-color: #1e293b !important;
         direction: rtl !important;
         text-align: right !important;
     }
 
-    /* تنسيق البطاقات ذات الحدود لتناسب اللابتوب والآيباد والجوال */
+    /* البطاقات ذات الحدود */
     [data-testid="stVerticalBlockBorderWrapper"], .stAlert {
         background-color: #1e293b !important;
         border-color: #334155 !important;
@@ -51,7 +51,7 @@ st.markdown(
         text-align: right !important;
     }
 
-    /* تثبيت مظهر صناديق التنبيه st.info بألوان واضحة ومقروءة وثابتة */
+    /* صناديق التنبيه st.info بألوان واضحة وثابتة لا تتأثر بالوضع الفاتح/الداكن للمتصفح */
     div[data-testid="stAlert"], div[data-testid="stInfo"] {
         background-color: #f1f5f9 !important;
         color: #0f172a !important;
@@ -66,7 +66,7 @@ st.markdown(
         line-height: 1.7 !important;
     }
 
-    /* تنسيق العناوين والفقرات لتبقى واضحة */
+    /* العناوين والفقرات */
     h1, h2, h3 {
         color: #f8fafc !important;
         text-align: right !important;
@@ -79,7 +79,7 @@ st.markdown(
         direction: rtl !important;
     }
 
-    /* تنسيق الأزرار بمرونة تامة تتناسب مع اللمس والشاشات المختلفة */
+    /* الأزرار بمرونة تامة للتفاعل باللمس أو الماوس */
     .stButton>button, .stDownloadButton>button {
         width: 100% !important;
         background-color: #10B981 !important;
@@ -89,23 +89,16 @@ st.markdown(
         border: none;
     }
 
-    /* توسيط الشعار والصور */
+    /* الشعار والصور */
     [data-testid="stImage"] {
         display: flex;
         justify-content: center;
     }
 
-    /* إبقاء الأكواد والأدلة التقنية من اليسار لليمين */
+    /* الأكواد التقنية */
     pre, code { 
         direction: ltr !important; 
         text-align: left !important; 
-    }
-
-    /* إخفاء الشريط الجانبي تماماً على الهواتف المحمولة فقط لمنع التداخل */
-    @media (max-width: 768px) {
-        [data-testid="stSidebar"] {
-            display: none !important;
-        }
     }
     </style>
     """,
@@ -144,7 +137,6 @@ def render_sidebar():
             st.success("اكتملت جميع المهام بنجاح!")
             st.divider()
 
-        # يظهر زر إعادة التشغيل فقط بعد بدء اللعبة (في الغرف أو التقرير)
         if ss.stage != "intro":
             st.button("🔄 إعادة تشغيل اللعبة", on_click=restart)
 
@@ -159,7 +151,6 @@ def show_intro():
             "أنت مسؤول الأمن في شركة وهمية. في كل غرفة موقف من مواقف العمل، "
             "وعليك أن تتصرف كما يتصرف المحترفون، في النهاية تحصل على تقرير بدرجتك لكل مجال."
         )
-        # النص المحدث والمحدد تماماً كما طلبتِ
         st.info("مشروع تعليمي مستوحى من مبادئ الضوابط الأساسية للأمن السيبراني (NCA ECC). هو ليس أداة امتثال رسمية ولا بديلًا عن تقييم متخصص. جميع البيانات والسيناريوهات وهمية.")
         st.write("")
         if st.button("🚀 ابدأ اللعبة الآن", type="primary"):
@@ -171,7 +162,6 @@ def show_room():
     level = levels[ss.room]
     st.progress((ss.room + 1) / len(levels), text=f"الغرفة {ss.room + 1} من {len(levels)}")
 
-    # بطاقة القصة والدليل التقني (قابلة للنسخ عبر st.code)
     with st.container(border=True):
         st.header(f"🚪 {level['title']}")
         st.write(level["story"])
@@ -234,7 +224,6 @@ def show_report():
 
     with st.expander("📄 نص التقرير الكامل", expanded=bool(result["mistakes"])):
         report = build_report(result, APP_NAME)
-        # جعل التقرير الكامل قابل للنسخ بسهولة عبر st.code بتنسيق markdown
         st.code(report, language="markdown")
 
     col1, col2 = st.columns(2)
