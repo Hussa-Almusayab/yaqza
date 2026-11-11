@@ -16,25 +16,53 @@ st.markdown(
     <style>
     @import url('https://googleapis.com');
 
-    /* تطبيق الخط العربي بدون كسر أبعاد شاشة الجوال */
+    /* تطبيق الخط العربي وتثبيت الخلفية #0f172a بدون كسر أبعاد الجوال */
     html, body, [class*="css"] {
         font-family: 'Cairo', sans-serif !important;
     }
 
-    /* ضبط اتجاه النصوص العربية داخل العناصر فقط (وليس على هيكل الصفحة) */
-    .stMarkdown, p, label, h1, h2, h3, [data-testid="stAlert"] {
+    .stApp, [data-testid="stHeader"] {
+        background-color: #0f172a !important;
+        color: #f8fafc !important;
+    }
+
+    [data-testid="stSidebar"] {
+        background-color: #1e293b !important;
+    }
+
+    /* لون البطاقات ذات الحدود */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background-color: #1e293b !important;
+        border-color: #334155 !important;
+        border-radius: 12px !important;
+    }
+
+    /* ضبط اتجاه ولون النصوص العربية داخل العناصر فقط */
+    .stMarkdown, p, label, h1, h2, h3, span, [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        color: #f8fafc !important;
         direction: rtl;
         text-align: right;
     }
 
-    /* توسيط العناوين الرئيسية والشعار */
-    h1, h2, h3 {
+    /* توسيط العناوين الرئيسية والشعار وأرقام التقرير */
+    h1, h2, h3, [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
         text-align: center !important;
     }
 
     [data-testid="stImage"] {
         display: flex;
         justify-content: center;
+    }
+
+    /* صناديق التنبيه بألوان واضحة لا تتأثر بوضع الجوال */
+    [data-testid="stAlert"] {
+        background-color: #1e293b !important;
+        border: 1px solid #38bdf8 !important;
+        direction: rtl;
+        text-align: right;
+    }
+    [data-testid="stAlert"] p {
+        color: #e2e8f0 !important;
     }
 
     /* تنسيق خيارات الأسئلة لليمين ومريحة للمس على الجوال */
@@ -46,22 +74,23 @@ st.markdown(
         padding: 6px 0;
     }
 
-    /* الأزرار بعرض كامل ومريحة على الجوال واللابتوب */
+    /* الأزرار بعرض كامل */
     .stButton > button, .stDownloadButton > button {
         width: 100%;
+        background-color: #10B981 !important;
+        color: #ffffff !important;
+        border: none !important;
         border-radius: 10px;
         font-weight: 700;
+    }
+    .stButton > button:hover, .stDownloadButton > button:hover {
+        background-color: #059669 !important;
     }
 
     /* إبقاء الأكواد التقنية من اليسار لليمين */
     pre, code {
         direction: ltr !important;
         text-align: left !important;
-    }
-
-    /* توسيط أرقام التقرير */
-    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
-        text-align: center !important;
     }
     </style>
     """,
@@ -85,10 +114,10 @@ def render_sidebar():
     with st.sidebar:
         st.image(LOGO_PATH, width=100)
         st.header(APP_NAME)
-        st.markdown(f"<p style='text-align: center; color: #94a3b8;'>{TAGLINE}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center !important; color: #94a3b8 !important;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         
-        st.markdown("<h3 style='color: #38bdf8; font-size: 1.05rem; text-align: center;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color: #38bdf8 !important; font-size: 1.05rem; text-align: center !important;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
         st.divider()
         
         if ss.stage == "room":
@@ -107,7 +136,7 @@ def show_intro():
     with st.container(border=True):
         st.image(LOGO_PATH, width=140)
         st.title(APP_NAME)
-        st.markdown(f"<p style='text-align: center; color: #38bdf8; font-weight: 600;'>{TAGLINE}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center !important; color: #38bdf8 !important; font-weight: 600;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         st.write(
             "أنت مسؤول الأمن في شركة وهمية. في كل غرفة موقف من مواقف العمل، "
