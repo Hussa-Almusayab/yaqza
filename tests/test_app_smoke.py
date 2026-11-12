@@ -2,6 +2,8 @@ from pathlib import Path
 
 from streamlit.testing.v1 import AppTest
 
+from engine.levels import load_levels
+
 APP = str(Path(__file__).resolve().parent.parent / "app.py")
 
 
@@ -14,7 +16,7 @@ def test_app_starts_without_error():
 def test_play_through_to_report():
     at = AppTest.from_file(APP).run(timeout=30)
     at.button[0].click().run()                    # start
-    for _ in range(2):                            # two rooms
+    for _ in range(len(load_levels())):           # every room
         for radio in at.radio:
             radio.set_value(radio.options[0])
         at.run()

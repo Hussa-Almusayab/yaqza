@@ -6,7 +6,6 @@ from config import APP_NAME, APP_NAME_EN, DISCLAIMER, DOMAINS, TAGLINE
 from engine.levels import load_levels
 from engine.scoring import build_report, score_answers
 
-# تحديد مسار الصورة تلقائياً بجانب ملف app.py
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo.png")
 
 st.set_page_config(page_title=f"{APP_NAME} | {APP_NAME_EN}", page_icon=LOGO_PATH, layout="centered")
@@ -16,7 +15,6 @@ st.markdown(
     <style>
     @import url('https://googleapis.com');
 
-    /* تطبيق الخط العربي وتثبيت الخلفية #0f172a بدون كسر أبعاد الجوال */
     html, body, [class*="css"] {
         font-family: 'Cairo', sans-serif !important;
     }
@@ -37,14 +35,13 @@ st.markdown(
         border-radius: 12px !important;
     }
 
-    /* ضبط اتجاه ولون النصوص العربية داخل العناصر فقط */
+    /* ضبط اتجاه ولون النصوص العربية */
     .stMarkdown, p, label, h1, h2, h3, span, [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
         color: #f8fafc !important;
         direction: rtl;
         text-align: right;
     }
 
-    /* توسيط العناوين الرئيسية والشعار وأرقام التقرير */
     h1, h2, h3, [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
         text-align: center !important;
     }
@@ -54,7 +51,7 @@ st.markdown(
         justify-content: center;
     }
 
-    /* بطاقة إخلاء المسؤولية المخصصة (تظهر بوضوح تام في الوضع الفاتح والداكن) */
+    /* بطاقة إخلاء المسؤولية المخصصة */
     .disclaimer-box {
         background-color: #0f172a !important;
         border: 1px solid #38bdf8 !important;
@@ -69,7 +66,21 @@ st.markdown(
         margin-top: 10px !important;
     }
 
-    /* تنسيق خيارات الأسئلة لليمين ومريحة للمس على الجوال */
+    /* تثبيت ألوان صناديق الإجابات الصحيحة والخاطئة والتنبيهات على الجوال في الوضع الفاتح والداكن */
+    [data-testid="stAlert"] {
+        background-color: #0f172a !important;
+        color: #f8fafc !important;
+        border-radius: 10px !important;
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    [data-testid="stAlert"] p, [data-testid="stAlert"] div {
+        color: #f8fafc !important;
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    /* تنسيق خيارات الأسئلة */
     div[role="radiogroup"] {
         direction: rtl;
         text-align: right;
@@ -78,7 +89,7 @@ st.markdown(
         padding: 6px 0;
     }
 
-    /* الأزرار بعرض كامل */
+    /* الأزرار */
     .stButton > button, .stDownloadButton > button {
         width: 100%;
         background-color: #10B981 !important;
@@ -91,7 +102,7 @@ st.markdown(
         background-color: #059669 !important;
     }
 
-    /* إبقاء الأكواد التقنية من اليسار لليمين */
+    /* الأكواد التقنية */
     pre, code {
         direction: ltr !important;
         text-align: left !important;
@@ -103,10 +114,10 @@ st.markdown(
 
 levels = load_levels()
 ss = st.session_state
-ss.setdefault("stage", "intro")      # intro | room | report
+ss.setdefault("stage", "intro")
 ss.setdefault("room", 0)
-ss.setdefault("answers", {})         # question id -> chosen option index
-ss.setdefault("checked", [])         # room ids already checked
+ss.setdefault("answers", {})
+ss.setdefault("checked", [])
 
 
 def restart():
@@ -121,7 +132,7 @@ def render_sidebar():
         st.markdown(f"<p style='text-align: center !important; color: #94a3b8 !important;'>{TAGLINE}</p>", unsafe_allow_html=True)
         st.divider()
         
-        st.markdown("<h3 style='color: #38bdf8 !important; font-size: 1.05rem; text-align: center !important;'>إعداد وتصميم:<br>حصه بنت فهد المسيب</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color: #38bdf8 !important; font-size: 1.05rem; text-align: center !important;'>إعداد وتصميم:<br>حصه المسيب</h3>", unsafe_allow_html=True)
         st.divider()
         
         if ss.stage == "room":
@@ -170,7 +181,7 @@ def show_room():
         st.write(level["story"])
         if level.get("evidence"):
             st.caption("🔍 الدليل التقني / سجل النظام:")
-            st.code(level["evidence"], language="text")
+            st.code(level["evidence"], language="text", wrap_lines=True)
 
     checked = level["id"] in ss.checked
     for idx, q in enumerate(level["questions"], 1):
