@@ -44,4 +44,4 @@ An Arabic educational game that teaches cybersecurity and compliance basics thro
     levels/             الغرف (ملف JSON لكل غرفة)
     tests/              اختبارات pytest
 
-المؤلفة: حصه بنت فهد المسيب (Hussa Almusayab) · الرخصة: MIT
+المؤلفة: حصه المسيب (Hussa Almusayab) · الرخصة: MIT
