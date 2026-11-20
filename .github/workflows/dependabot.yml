@@ -1,0 +1,12 @@
+name: Weekly pip dependency check
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for outdated pip packages
+        run: python -m pip list --outdated
